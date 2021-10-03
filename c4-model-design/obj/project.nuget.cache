@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f+QZDYQ3izS1fyZchXyO8dpCmdonIHtDBeYtCjW+XnkazRJe0ZJYnTXaDJeV28Aw9V0pSyZuZ39GeNkajf0Dtg==",
+  "dgSpecHash": "swjjik/kzZwyYDJ5xxqXRv0vYdLcmmpWGmQqxbte4S72PbUQ0FMt+y6o4QJWDc5TP+zNTRlRDdWcUM78FwMTSw==",
   "success": true,
-  "projectFilePath": "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
+  "projectFilePath": "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kilo\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\Kilo\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

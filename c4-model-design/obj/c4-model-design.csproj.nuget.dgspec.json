@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj": {}
+    "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj": {}
   },
   "projects": {
-    "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj": {
+    "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
+        "projectUniqueName": "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
         "projectName": "c4-model-design",
-        "projectPath": "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
+        "projectPath": "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\c4-model-design.csproj",
         "packagesPath": "C:\\Users\\Kilo\\.nuget\\packages\\",
-        "outputPath": "d:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\obj\\",
+        "outputPath": "D:\\Desarrollo\\Des-C4-model\\c4-model-truetrip\\c4-model-design\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
