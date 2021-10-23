@@ -56,7 +56,7 @@ namespace c4_model_design
             Container landingPage =             plannerSystem.AddContainer("Landing Page", "", "Bootstrap");
             Container tripPlanContext =         plannerSystem.AddContainer("Trip Plan Context", "Bounded Context del Microservicio de Planificación de viajes y hospedajes en el destino seleccionado", "NodeJS (NestJS)");
             Container promotionsContext =       plannerSystem.AddContainer("Promotions Context", "Bounded Context del Microservicio de promociones existentes", "NodeJS (NestJS)");
-            Container partnerDetailsContext =   plannerSystem.AddContainer("Partner Details Context", "Bounded Context del Microservicio de información de los partners", "NodeJS (NestJS)");
+            Container partnerContext =   plannerSystem.AddContainer("Partner Context", "Bounded Context del Microservicio de información de los partners", "NodeJS (NestJS)");
             Container database =                plannerSystem.AddContainer("Database", "", "MySQL");
             Container travelerContext =         plannerSystem.AddContainer("Traveler Context", "Bounded Context del microservicio de información del traveler", "NodeJS (NestJS)");
             Container authenticationContext =   plannerSystem.AddContainer("Authentication Context", "Bounded Context del microservicio de autenticación para traveler y partner", "NodeJS (NestJS)");
@@ -72,16 +72,16 @@ namespace c4_model_design
             mobileApplication.Uses(travelerContext,         "Request", "JSON/HTTPS");
             mobileApplication.Uses(authenticationContext,   "Request", "JSON/HTTPS");
             mobileApplication.Uses(promotionsContext,       "Request", "JSON/HTTPS");
-            mobileApplication.Uses(partnerDetailsContext,   "Request", "JSON/HTTPS");
+            mobileApplication.Uses(partnerContext,   "Request", "JSON/HTTPS");
             webApplication.Uses(tripPlanContext,            "Request", "JSON/HTTPS");
             webApplication.Uses(authenticationContext,      "Request", "JSON/HTTPS");
             webApplication.Uses(travelerContext,            "Request", "JSON/HTTPS");
             webApplication.Uses(promotionsContext,          "Request", "JSON/HTTPS");
-            webApplication.Uses(partnerDetailsContext,      "Request", "JSON/HTTPS");      
+             
             
             tripPlanContext.Uses(database, "", "JDBC");
             promotionsContext.Uses(database, "", "JDBC");
-            partnerDetailsContext.Uses(database, "", "JDBC");
+            partnerContext.Uses(database, "", "JDBC");
             authenticationContext.Uses(database, "", "JDBC");
             travelerContext.Uses(database, "", "JDBC");
                         
@@ -94,7 +94,7 @@ namespace c4_model_design
             database.AddTags("Database");
             tripPlanContext.AddTags("BoundedContext");            
             promotionsContext.AddTags("BoundedContext");            
-            partnerDetailsContext.AddTags("BoundedContext");            
+            partnerContext.AddTags("BoundedContext");            
             travelerContext.AddTags("BoundedContext");            
             authenticationContext.AddTags("BoundedContext");            
 
@@ -217,6 +217,47 @@ namespace c4_model_design
             tripPlanComponentView.Add(googleMaps);
             tripPlanComponentView.Add(database);
             tripPlanComponentView.AddAllComponents();
+
+
+
+ // 3. Diagrama de Componentes -> Partner
+
+Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer", "", "NodeJS (NestJS)");
+            Component partnerController =          partnerContext.AddComponent("Partner Controller", "REST Api endpoints de partners", "NodeJS (NestJS)");
+            Component partnerApplicationService =  partnerContext.AddComponent("Partner Application Service", "Provee metodos para los datos de partner", "NodeJS (NestJS)");
+            Component partnerRepository =          partnerContext.AddComponent("Partner Repository", "Informacion de partner", "NodeJS (NestJS)");
+            Component reviewRepository =           partnerContext.AddComponent("Review Repository", "Reviews de los servicios del Partner", "NodeJS (NestJS)");
+            Component statisticsRepository =           partnerContext.AddComponent("Statistic Repository", "Estadisticas de los servicios del Partner", "NodeJS (NestJS)");
+
+            mobileApplication.Uses(partnerController,"JSON");
+            webApplication.Uses(partnerController,"JSON");
+            partnerController.Uses(partnerApplicationService,"Usa");
+              partnerApplicationService.Uses(reviewRepository,"Usa");
+            partnerApplicationService.Uses(statisticsRepository,"Usa");
+            partnerApplicationService.Uses(partnerRepository,"Usa");
+            partnerApplicationService.Uses(domainLayerPartner,"Usa");
+            partnerRepository.Uses(database,"","JDBC");
+            reviewRepository.Uses(database,"","JDBC");
+            statisticsRepository.Uses(database,"","JDBC");
+            
+            //tags
+            domainLayerPartner.AddTags("Component");
+            partnerRepository.AddTags("Component");
+            partnerController.AddTags("Component");
+            partnerApplicationService.AddTags("Component");
+           reviewRepository.AddTags("Component");
+          statisticsRepository.AddTags("Component");
+
+            //style
+            //styles.Add(new ElementStyle("Component") { Shape = Shape.Component, Background = "#facc2e", Icon = "" });
+
+            ComponentView partnerComponentView = viewSet.CreateComponentView(partnerContext, "Partner Components", "Component Diagram");
+            partnerComponentView.PaperSize = PaperSize.A4_Landscape;
+            partnerComponentView.Add(mobileApplication);   
+            partnerComponentView.Add(webApplication);
+            partnerComponentView.Add(database);
+            partnerComponentView.AddAllComponents();
+
 
             structurizrClient.UnlockWorkspace(workspaceId);
             structurizrClient.PutWorkspace(workspaceId, workspace);
