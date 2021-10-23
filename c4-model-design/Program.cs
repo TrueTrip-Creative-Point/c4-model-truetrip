@@ -225,6 +225,9 @@ namespace c4_model_design
 Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer", "", "NodeJS (NestJS)");
             Component partnerController =          partnerContext.AddComponent("Partner Controller", "REST Api endpoints de partners", "NodeJS (NestJS)");
             Component partnerApplicationService =  partnerContext.AddComponent("Partner Application Service", "Provee metodos para los datos de partner", "NodeJS (NestJS)");
+
+ Component reviewApplicationService =  partnerContext.AddComponent("Review Application Service", "Provee metodos para las reseñas del partner", "NodeJS (NestJS)");
+ Component statisticsApplicationService =  partnerContext.AddComponent("Statistics Application Service", "Provee metodos para las estadisticas del partner", "NodeJS (NestJS)");
             Component partnerRepository =          partnerContext.AddComponent("Partner Repository", "Informacion de partner", "NodeJS (NestJS)");
             Component reviewRepository =           partnerContext.AddComponent("Review Repository", "Reviews de los servicios del Partner", "NodeJS (NestJS)");
             Component statisticsRepository =           partnerContext.AddComponent("Statistic Repository", "Estadisticas de los servicios del Partner", "NodeJS (NestJS)");
@@ -232,9 +235,17 @@ Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer
             mobileApplication.Uses(partnerController,"JSON");
             webApplication.Uses(partnerController,"JSON");
             partnerController.Uses(partnerApplicationService,"Usa");
-              partnerApplicationService.Uses(reviewRepository,"Usa");
-            partnerApplicationService.Uses(statisticsRepository,"Usa");
+
+  partnerController.Uses(reviewApplicationService,"Usa");
+  partnerController.Uses(statisticsApplicationService,"Usa");
+
+              reviewApplicationService.Uses(reviewRepository,"Usa");
+            statisticsApplicationService.Uses(statisticsRepository,"Usa");
             partnerApplicationService.Uses(partnerRepository,"Usa");
+
+     reviewApplicationService.Uses(domainLayerPartner,"Usa");
+            statisticsApplicationService.Uses(domainLayerPartner,"Usa");
+
             partnerApplicationService.Uses(domainLayerPartner,"Usa");
             partnerRepository.Uses(database,"","JDBC");
             reviewRepository.Uses(database,"","JDBC");
