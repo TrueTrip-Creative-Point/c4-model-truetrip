@@ -220,30 +220,27 @@ namespace c4_model_design
 
 
 
- // 3. Diagrama de Componentes -> Partner
-
-Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer", "", "NodeJS (NestJS)");
-            Component partnerController =          partnerContext.AddComponent("Partner Controller", "REST Api endpoints de partners", "NodeJS (NestJS)");
-            Component partnerApplicationService =  partnerContext.AddComponent("Partner Application Service", "Provee metodos para los datos de partner", "NodeJS (NestJS)");
-
- Component reviewApplicationService =  partnerContext.AddComponent("Review Application Service", "Provee metodos para las reseñas del partner", "NodeJS (NestJS)");
- Component statisticsApplicationService =  partnerContext.AddComponent("Statistics Application Service", "Provee metodos para las estadisticas del partner", "NodeJS (NestJS)");
-            Component partnerRepository =          partnerContext.AddComponent("Partner Repository", "Informacion de partner", "NodeJS (NestJS)");
-            Component reviewRepository =           partnerContext.AddComponent("Review Repository", "Reviews de los servicios del Partner", "NodeJS (NestJS)");
-            Component statisticsRepository =           partnerContext.AddComponent("Statistic Repository", "Estadisticas de los servicios del Partner", "NodeJS (NestJS)");
+            // 3. Diagrama de Componentes -> Partner
+            Component domainLayerPartner =            partnerContext.AddComponent("Domain Layer", "", "NodeJS (NestJS)");
+            Component partnerController =             partnerContext.AddComponent("Partner Controller", "REST Api endpoints de partners", "NodeJS (NestJS)");
+            Component partnerApplicationService =     partnerContext.AddComponent("Partner Application Service", "Provee metodos para los datos de partner", "NodeJS (NestJS)");            Component reviewApplicationService =  partnerContext.AddComponent("Review Application Service", "Provee metodos para las reseñas del partner", "NodeJS (NestJS)");
+            Component statisticsApplicationService =  partnerContext.AddComponent("Statistics Application Service", "Provee metodos para las estadisticas del partner", "NodeJS (NestJS)");
+            Component partnerRepository =             partnerContext.AddComponent("Partner Repository", "Informacion de partner", "NodeJS (NestJS)");
+            Component reviewRepository =              partnerContext.AddComponent("Review Repository", "Reviews de los servicios del Partner", "NodeJS (NestJS)");
+            Component statisticsRepository =          partnerContext.AddComponent("Statistic Repository", "Estadisticas de los servicios del Partner", "NodeJS (NestJS)");
 
             mobileApplication.Uses(partnerController,"JSON");
             webApplication.Uses(partnerController,"JSON");
             partnerController.Uses(partnerApplicationService,"Usa");
 
-  partnerController.Uses(reviewApplicationService,"Usa");
-  partnerController.Uses(statisticsApplicationService,"Usa");
+            partnerController.Uses(reviewApplicationService,"Usa");
+            partnerController.Uses(statisticsApplicationService,"Usa");
 
-              reviewApplicationService.Uses(reviewRepository,"Usa");
+            reviewApplicationService.Uses(reviewRepository,"Usa");
             statisticsApplicationService.Uses(statisticsRepository,"Usa");
             partnerApplicationService.Uses(partnerRepository,"Usa");
 
-     reviewApplicationService.Uses(domainLayerPartner,"Usa");
+            reviewApplicationService.Uses(domainLayerPartner,"Usa");
             statisticsApplicationService.Uses(domainLayerPartner,"Usa");
 
             partnerApplicationService.Uses(domainLayerPartner,"Usa");
@@ -256,8 +253,8 @@ Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer
             partnerRepository.AddTags("Component");
             partnerController.AddTags("Component");
             partnerApplicationService.AddTags("Component");
-           reviewRepository.AddTags("Component");
-          statisticsRepository.AddTags("Component");
+            reviewRepository.AddTags("Component");
+            statisticsRepository.AddTags("Component");
 
             //style
             //styles.Add(new ElementStyle("Component") { Shape = Shape.Component, Background = "#facc2e", Icon = "" });
@@ -269,6 +266,37 @@ Component domainLayerPartner =         partnerContext.AddComponent("Domain Layer
             partnerComponentView.Add(database);
             partnerComponentView.AddAllComponents();
 
+
+            // 3. Diagrama de Componentes -> Authentication 
+            Component domainLayerAuthentication =            authenticationContext.AddComponent("Domain Layer", "", "NodeJS (NestJS)");
+            Component authenticationController =             authenticationContext.AddComponent("Authentication Controller", "REST Api endpoints de Authentication", "NodeJS (NestJS)");
+            Component authenticationApplicationService =     authenticationContext.AddComponent("Authentication Application Service", "Provee metodos para la autenticacion", "NodeJS (NestJS)");            
+            Component authenticationRepository =             authenticationContext.AddComponent("Authentication Repository", "Informacion para autentificacion", "NodeJS (NestJS)");
+
+            mobileApplication.Uses(authenticationController,"JSON");
+            webApplication.Uses(authenticationController,"JSON");
+
+            authenticationController.Uses(authenticationApplicationService,"Usa");
+            authenticationApplicationService.Uses(authenticationRepository,"Usa");
+            authenticationApplicationService.Uses(domainLayerAuthentication,"Usa");
+
+            authenticationRepository.Uses(database,"","JDBC");
+            
+            //tags
+            domainLayerAuthentication.AddTags("Component");
+            authenticationRepository.AddTags("Component");
+            authenticationController.AddTags("Component");
+            authenticationApplicationService.AddTags("Component");
+
+            //style
+            //styles.Add(new ElementStyle("Component") { Shape = Shape.Component, Background = "#facc2e", Icon = "" });
+
+            ComponentView authenticationComponentView = viewSet.CreateComponentView(authenticationContext, "Authentication Components", "Component Diagram");
+            authenticationComponentView.PaperSize = PaperSize.A4_Landscape;
+            authenticationComponentView.Add(mobileApplication);   
+            authenticationComponentView.Add(webApplication);
+            authenticationComponentView.Add(database);
+            authenticationComponentView.AddAllComponents();
 
             structurizrClient.UnlockWorkspace(workspaceId);
             structurizrClient.PutWorkspace(workspaceId, workspace);
